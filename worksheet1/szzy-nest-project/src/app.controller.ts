@@ -7,6 +7,6 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    return 'Hi Shi Zhangzhuoyue, Welcome to AUT CISE Program!';
   }
 }

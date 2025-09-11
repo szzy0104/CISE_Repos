@@ -9,7 +9,7 @@ on:
 
 jobs:
   backend:
-    name: Backend (Nest)
+    name: Backend (NestJS)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -22,7 +22,7 @@ jobs:
           node-version: 18
       - name: Install deps
         run: npm ci
-      - name: Test
+      - name: Run tests
         run: npm test -- --watchAll=false
 
   frontend:
@@ -39,5 +39,5 @@ jobs:
           node-version: 18
       - name: Install deps
         run: npm ci
-      - name: Test
+      - name: Run tests
         run: npm test -- --watchAll=false

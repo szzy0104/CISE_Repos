@@ -5,21 +5,39 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  build:
+  backend:
+    name: Backend (Nest)
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: worksheet2/my-nest-app
     steps:
       - uses: actions/checkout@v3
-
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
+      - name: Install deps
+        run: npm ci
+      - name: Test
+        run: npm test -- --watchAll=false
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test
+  frontend:
+    name: Frontend (React)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: worksheet2/my-react-app
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install deps
+        run: npm ci
+      - name: Test
+        run: npm test -- --watchAll=false

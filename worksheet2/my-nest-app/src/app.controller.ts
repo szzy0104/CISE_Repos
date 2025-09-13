@@ -1,12 +1,22 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+cat > src/articles.controller.ts <<'EOF'
+import { Controller, Get, Param } from '@nestjs/common';
+import { ARTICLES, Article } from './dummydata/articles';
 
-@Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+@Controller('api/articles')
+export class ArticlesController {
+  constructor() {
+    // 自检：控制器是否真正被 Nest 加载
+    console.log('✅ ArticlesController loaded');
+  }
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getAll(): Article[] {
+    return ARTICLES;
+  }
+
+  @Get(':id')
+  getById(@Param('id') id: string): Article | undefined {
+    return ARTICLES.find((a) => a._id === id);
   }
 }
+EOF

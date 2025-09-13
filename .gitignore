@@ -1,3 +1,6 @@
+node_modules/
+dist/
 worksheet3_backend/
 worksheet3_frontend/
 worksheet4/
+
